@@ -5,6 +5,7 @@ const game = {
         // TODO: do the rest of the game setup here (eg. add event listeners)
         this.initRightClick();
         this.checkwin();
+        this.checklose();
     },
     freeze: function () {
         this.freezeLeftClick();
@@ -283,6 +284,36 @@ const game = {
                         e.preventDefault();
                     }
                 };
+            });
+        };
+    },
+    checklose() {
+        let fields = document.querySelectorAll('.game-field .row .field');
+        for (let field of fields) {
+            field.addEventListener('click', function (lost) {
+                if (lost.currentTarget.classList == 'pit') {
+                    alert('Game Over!');
+                    for (let i of fields) {
+                        if (i.classList == 'field mine') {
+                            i.classList = 'pit'
+                        };
+                        if (i.classList == 'mineflag') {
+                            i.classList = 'pit'
+                        };
+                    };
+                    document.addEventListener("click",handler,true);
+
+                    function handler(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                    document.addEventListener("contextmenu",handler,true);
+
+                    function handler(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                    };
+                    }
             });
         };
     },
