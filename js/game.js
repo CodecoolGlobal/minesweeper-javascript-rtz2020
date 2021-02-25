@@ -4,6 +4,11 @@ const game = {
         this.initLeftClick();
         // TODO: do the rest of the game setup here (eg. add event listeners)
         this.initRightClick();
+        this.checkwin();
+    },
+    freeze: function () {
+        this.freezeLeftClick();
+        this.freezeRightClick();
     },
 
     drawBoard: function () {
@@ -12,6 +17,7 @@ const game = {
         const rows = parseInt(urlParams.get('rows'));
         const cols = parseInt(urlParams.get('cols'));
         const mineCount = parseInt(urlParams.get('mines'));
+        document.getElementById("flags-left-counter").value = mineCount;
         const minePlaces = this.getRandomMineIndexes(mineCount, cols, rows);
 
         let gameField = document.querySelector(".game-field");
@@ -27,7 +33,6 @@ const game = {
     },
     getRandomMineIndexes: function (mineCount, cols, rows) {
         const cellCount = cols * rows;
-        document.getElementById("flags-left-counter").value = mineCount;
         let mines = new Set();
         do {
             mines.add(Math.round(Math.random() * (cellCount - 1)));
@@ -51,6 +56,24 @@ const game = {
             `<div class="field${isMine ? ' mine' : ''}"
                         data-row="${row}"
                         data-col="${col}"></div>`);
+    },
+
+    freezeLeftClick() {
+        let fields = document.querySelectorAll('.game-field .row .field');
+        for (let field of fields) {
+            field.addEventListener('click', function (event) {
+                event.preventDefault();
+            });
+        };
+    },
+
+    freezeRightClick() {
+        let fields = document.querySelectorAll('.game-field .row .field');
+        for (let field of fields) {
+            field.addEventListener('contextmenu', function (event) {
+                event.preventDefault();
+            });
+        };
     },
     // reference solution for "Create mine flagging feature" user story
     initRightClick() {
@@ -231,6 +254,37 @@ const game = {
                 };
             });
         }
+    },
+    checkwin() {
+        let fields = document.querySelectorAll('.game-field .row .field');
+        for (let field of fields) {
+            field.addEventListener('click', function (event) {
+                let counter = 0;
+                let fields = document.querySelectorAll('.game-field .row .field');
+                for (field of fields) {
+                    if (field.classList == 'field') {
+                        counter++;
+                    } else if (field.classList == 'flagged') {
+                        counter++;
+                    }
+                };
+                if (counter == 0) {
+                    alert("You won");
+                    document.addEventListener("click",handler,true);
+
+                    function handler(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                    document.addEventListener("contextmenu",handler,true);
+
+                    function handler(e){
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                };
+            });
+        };
     },
 };
 
