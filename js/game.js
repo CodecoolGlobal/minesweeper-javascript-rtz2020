@@ -1,7 +1,7 @@
 const game = {
     init: function () {
         this.drawBoard();
-
+        this.initLeftClick();
         // TODO: do the rest of the game setup here (eg. add event listeners)
         this.initRightClick();
     },
@@ -55,7 +55,7 @@ const game = {
     initRightClick() {
         // we collect all fields of the game.
         // (the same selector is used as in the style.css file for finding the fields)
-        const fields = document.querySelectorAll('.game-field .row .field');
+        let fields = document.querySelectorAll('.game-field .row .field');
 
         // for all fields...
         for (let field of fields) {
@@ -68,7 +68,162 @@ const game = {
 
                 // and "flagged" class toggles on the clicked element
                 // (styles of "flagged" class are defined in style.css)
-                event.currentTarget.classList.toggle('flagged');
+                if (event.currentTarget.classList == 'open') {
+                    event.currentTarget.classList = 'open'
+                } else if (event.currentTarget.classList == 'flagged'){
+                    event.currentTarget.classList = 'field';
+                } else if (event.currentTarget.classList == 'pit'){
+                    event.currentTarget.classList = 'pit';
+                } else if (event.currentTarget.classList == 'field mine'){
+                    event.currentTarget.classList = 'mineflag';
+                } else if (event.currentTarget.classList == 'mineflag'){
+                    event.currentTarget.classList = 'field mine';
+                } else {
+                    event.currentTarget.classList = 'flagged'
+                }
+            });
+        }
+    },
+
+    initLeftClick() {
+        let fields = document.querySelectorAll('.game-field .row .field');
+        for (let field of fields) {
+            field.addEventListener('click', function (event) {
+                let count = 0
+                let nextrow = (Number(field.dataset.row)-1)
+                let nextcol = (Number(field.dataset.col)-1)
+                let nextrow2 = (Number(field.dataset.row)-1)
+                let nextcol2 = (Number(field.dataset.col))
+                let nextrow3 = (Number(field.dataset.row)-1)
+                let nextcol3 = (Number(field.dataset.col)+1)
+                let nextrow4 = (Number(field.dataset.row))
+                let nextcol4 = (Number(field.dataset.col)-1)
+                let nextrow5 = (Number(field.dataset.row))
+                let nextcol5 = (Number(field.dataset.col)+1)
+                let nextrow6 = (Number(field.dataset.row)+1)
+                let nextcol6 = (Number(field.dataset.col)-1)
+                let nextrow7 = (Number(field.dataset.row)+1)
+                let nextcol7 = (Number(field.dataset.col))
+                let nextrow8 = (Number(field.dataset.row)+1)
+                let nextcol8 = (Number(field.dataset.col)+1)
+                for (let i of fields) {
+                    if (i.dataset.row == nextrow) {
+                        if (i.dataset.col == nextcol) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                    if (i.dataset.row == nextrow2) {
+                        if (i.dataset.col == nextcol2) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                    if (i.dataset.row == nextrow3) {
+                        if (i.dataset.col == nextcol3) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                    if (i.dataset.row == nextrow4) {
+                        if (i.dataset.col == nextcol4) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                    if (i.dataset.row == nextrow5) {
+                        if (i.dataset.col == nextcol5) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                    if (i.dataset.row == nextrow6) {
+                        if (i.dataset.col == nextcol6) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                    if (i.dataset.row == nextrow7) {
+                        if (i.dataset.col == nextcol7) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                    if (i.dataset.row == nextrow8) {
+                        if (i.dataset.col == nextcol8) {
+                            if (i.classList == 'field mine') {
+                                count += 1
+                            };
+                            if (i.classList == 'pit') {
+                                count += 1
+                            };
+                            if (i.classList == 'mineflag') {
+                                count += 1
+                            };
+                        };
+                    };
+                };
+                if (event.currentTarget.classList == 'flagged') {
+                    event.currentTarget.classList = 'flagged'
+                } else if (event.currentTarget.classList == 'field mine') {
+                    event.currentTarget.classList = 'pit';
+                } else if (event.currentTarget.classList == 'pit') {
+                    event.currentTarget.classList = 'pit';
+                } else {
+                    event.currentTarget.classList = 'open';
+                    if (count != 0) {
+                    event.currentTarget.textContent = count;
+                    };
+                };
             });
         }
     },

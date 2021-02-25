@@ -30,7 +30,48 @@
     box-sizing: border-box;
 }
 
-/* Reference solution for "Create mine flagging feature" user story */
-.game-field .row .field.flagged {
+.game-field .row .open {
+    height: 16px;
+    width: 16px;
+    background: url('/img/open-field.png');
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-field .row .mine {
+    height: 16px;
+    width: 16px;
+    background: url('/img/closed-field.png');
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-field .row .pit {
+    height: 16px;
+    width: 16px;
+    background: url('/img/mine.png');
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-field .row .mineflag {
+    height: 16px;
+    width: 16px;
     background: url('/img/flag.png');
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Reference solution for "Create mine flagging feature" user story */
+.game-field .row .flagged {
+    height: 16px;
+    width: 16px;
+    background: url('/img/flag.png');
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
