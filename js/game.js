@@ -27,6 +27,7 @@ const game = {
     },
     getRandomMineIndexes: function (mineCount, cols, rows) {
         const cellCount = cols * rows;
+        document.getElementById("flags-left-counter").value = mineCount;
         let mines = new Set();
         do {
             mines.add(Math.round(Math.random() * (cellCount - 1)));
@@ -72,14 +73,18 @@ const game = {
                     event.currentTarget.classList = 'open'
                 } else if (event.currentTarget.classList == 'flagged'){
                     event.currentTarget.classList = 'field';
+                    document.getElementById("flags-left-counter").value++
                 } else if (event.currentTarget.classList == 'pit'){
                     event.currentTarget.classList = 'pit';
                 } else if (event.currentTarget.classList == 'field mine'){
                     event.currentTarget.classList = 'mineflag';
+                    document.getElementById("flags-left-counter").value -= 1
                 } else if (event.currentTarget.classList == 'mineflag'){
                     event.currentTarget.classList = 'field mine';
+                    document.getElementById("flags-left-counter").value++
                 } else {
                     event.currentTarget.classList = 'flagged'
+                    document.getElementById("flags-left-counter").value -= 1
                 }
             });
         }
